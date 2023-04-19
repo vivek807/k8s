@@ -1,0 +1,6 @@
+user.service.url: http://localhost:8081/
+
+spring:
+  datasource:
+    username: username
+    password: Admin@123

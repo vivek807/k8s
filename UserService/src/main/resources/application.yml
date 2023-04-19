@@ -1,0 +1,32 @@
+server:
+  error.whitelabel.enabled: false
+
+springdoc.swagger-ui:
+  path: /index.html
+  tryItOutEnabled: true
+  filter: false
+
+application.name: '@project.artifactId@'
+application.description: '@project.description@'
+build.version: '@project.version@'
+
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/${MYSQL_DB_NAME:usersdb}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        generate_statistics: false
+    hibernate.ddl-auto: update
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization.INDENT_OUTPUT: false
+    serialization.FAIL_ON_EMPTY_BEANS: false
+    mapper.BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES: true

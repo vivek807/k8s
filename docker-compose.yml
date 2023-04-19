@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_ROOT_PASSWORD: Root_Admin@123
+      MYSQL_USER: user
+      MYSQL_PASSWORD: Admin@123
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+
+  users:
+    image: 'epamvivekdhiman/user-service:0.1'
+    container_name: 'user-service-instance'
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+    depends_on:
+      - db
+    environment:
+      MYSQL_USER: root
+      MYSQL_HOST: db
+      MYSQL_PASSWORD: Root_Admin@123
+      MYSQL_DB_NAME: usersdb
+    ports:
+    - '8081:8080'
+
+  posts:
+    image: 'epamvivekdhiman/post-service:0.1'
+    container_name: 'post-service-instance'
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 5
+    depends_on:
+      - users
+    environment:
+      MYSQL_USER: root
+      MYSQL_HOST: db
+      MYSQL_PASSWORD: Root_Admin@123
+      MYSQL_DB_NAME: postsdb
+      USERS_URL: http://users:8080
+    ports:
+      - '8080:8080'
