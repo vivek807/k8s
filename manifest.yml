@@ -1,0 +1,190 @@
+---
+#NAMESPACE: k8s-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-namespace
+
+---
+#SERVICE: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: k8s-namespace
+spec:
+  selector:
+    app: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+  clusterIP: None
+  publishNotReadyAddresses: true
+
+---
+#STATEFULSET: mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: k8s-namespace
+spec:
+  serviceName: mysql
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mysql
+          image: mysql:8.0.26
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root@123
+          ports:
+            - name: mysql
+              containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data
+        - name: init-script
+          configMap:
+            name: mysql-init-script
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
+
+---
+#CONFIGMAP: mysql-init-script
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+  namespace: k8s-namespace
+data:
+  init.sql: |
+    create database if not exists postsdb;
+    create database if not exists usersdb;
+
+---
+#SERVICE: users-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+  namespace: k8s-namespace
+spec:
+  type: NodePort
+  selector:
+    app: users
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
+
+---
+#DEPLOYMENT: users-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+  namespace: k8s-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: users
+          image: 'epamvivekdhiman/user-service:0.1'
+          env:
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root@123
+            - name: MYSQL_DB_NAME
+              value: usersdb
+
+---
+#SERVICE: posts-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+  namespace: k8s-namespace
+spec:
+  type: NodePort
+  selector:
+    app: posts
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30002
+---
+#DEPLOYMENT: posts-deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-deployment
+  namespace: k8s-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: 'epamvivekdhiman/post-service:0.1'
+          env:
+            - name: MYSQL_HOST
+              value: mysql
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root@123
+            - name: MYSQL_DB_NAME
+              value: postsdb
+            - name: USERS_URL
+              value: http://users-service:8080

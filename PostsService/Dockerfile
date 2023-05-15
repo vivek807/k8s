@@ -13,5 +13,5 @@ ARG JAR_FILE=PostsService-0.1.jar
 WORKDIR /opt/app
 COPY --from=maven /target/${JAR_FILE} /opt/app/
 
-EXPOSE 8080
+# EXPOSE 8080
 ENTRYPOINT ["java","-jar", "PostsService-0.1.jar"]
