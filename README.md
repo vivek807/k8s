@@ -1,5 +1,7 @@
 "# k8s" 
 
+<link rel="stylesheet" type="text/css" href="styles.css">
+
 ## Steps to rebuild: 
 #### From Parent Folder run `rebuild-docker.sh` to compile and upload binary to docker registry.
 ##### PS. Replace/pass your username
@@ -19,23 +21,6 @@ Ports forwarding to expose internal services:
 <li> localhost:8086 -> users-service </li>
 
 <br/>
-
-<style>
-  figure {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 0 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  img {
-    width: 100%;
-    margin: 0 10px 10px 0;
-    box-sizing: border-box;
-    border: 1px solid
-  }
-</style>
 
 <figure>
  <img src="https://github.com/vivek807/k8s/blob/main/Docs/7.jpg?raw=true"/>
