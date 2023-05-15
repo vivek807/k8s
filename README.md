@@ -18,15 +18,33 @@ Ports forwarding to expose internal services:
 <li> localhost:8085 -> post-service </li>
 <li> localhost:8086 -> users-service </li>
 
+<br/>
 
-<ul>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/7.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/8.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/9.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/10.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/11.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/12.jpg?raw=true"/>
-</ul>
+<style>
+  figure {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 0 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  img {
+    width: 100%;
+    margin: 0 10px 10px 0;
+    box-sizing: border-box;
+    border: 1px solid
+  }
+</style>
+
+<figure>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/7.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/8.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/9.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/10.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/11.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/12.jpg?raw=true"/>
+</figure>
 
 #### Stop pods
 Run command `kubectl delete -f manifest.yml -n k8s-namespace`
@@ -38,11 +56,13 @@ To launch with docker, just run the command `docker compose up`
 <li> localhost:8080 -> post-service </li>
 <li> localhost:8081 -> user-service </li>
 
-<ul>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/1.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/2.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/3.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/4.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/5.jpg?raw=true"/>
-<li> <img src="https://github.com/vivek807/k8s/blob/main/Docs/6.jpg?raw=true"/>
-</ul>
+<br/>
+
+<figure>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/1.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/2.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/3.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/4.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/5.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/6.jpg?raw=true"/>
+</figure>
