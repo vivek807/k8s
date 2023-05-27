@@ -7,6 +7,32 @@ metadata:
   name: k8s-namespace
 
 ---
+#SECRET: db-secrets
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secrets
+  namespace: k8s-namespace
+type: Opaque
+data:
+  username: cm9vdA==
+  password: cm9vdEAxMjM=
+
+---
+#CONFIGMAP: mysql-init-script
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+  namespace: k8s-namespace
+data:
+  init.sql: |
+    create database if not exists postsdb;
+    create database if not exists usersdb;
+
+---
 #SERVICE: mysql
 ---
 apiVersion: v1
@@ -49,7 +75,10 @@ spec:
           image: mysql:8.0.26
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root@123
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
           ports:
             - name: mysql
               containerPort: 3306
@@ -76,19 +105,6 @@ spec:
         resources:
           requests:
             storage: 1Gi
-
----
-#CONFIGMAP: mysql-init-script
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-init-script
-  namespace: k8s-namespace
-data:
-  init.sql: |
-    create database if not exists postsdb;
-    create database if not exists usersdb;
 
 ---
 #SERVICE: users-service
@@ -133,11 +149,24 @@ spec:
             - name: MYSQL_HOST
               value: mysql
             - name: MYSQL_USER
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: username
             - name: MYSQL_PASSWORD
-              value: root@123
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
             - name: MYSQL_DB_NAME
               value: usersdb
+          volumeMounts:
+            - name: mysql-init-script
+              mountPath: /mysql-init-script
+      volumes:
+        - name: mysql-init-script
+          configMap:
+            name: mysql-init-script
 
 ---
 #SERVICE: posts-service
@@ -181,9 +210,15 @@ spec:
             - name: MYSQL_HOST
               value: mysql
             - name: MYSQL_USER
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: username
             - name: MYSQL_PASSWORD
-              value: root@123
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: password
             - name: MYSQL_DB_NAME
               value: postsdb
             - name: USERS_URL
