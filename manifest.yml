@@ -223,6 +223,8 @@ kind: Deployment
 metadata:
   name: posts-deployment
   namespace: k8s-namespace
+  annotations:
+    kubernetes.io/change-cause: "Deploying 0.2 version"
 spec:
   replicas: 2
   strategy:
