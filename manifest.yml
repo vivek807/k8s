@@ -225,6 +225,11 @@ metadata:
   namespace: k8s-namespace
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: posts
@@ -235,7 +240,7 @@ spec:
     spec:
       containers:
         - name: posts
-          image: 'epamvivekdhiman/post-service:0.1'
+          image: 'epamvivekdhiman/post-service:0.2'
           env:
             - name: MYSQL_HOST
               value: mysql

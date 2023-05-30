@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.vivek</groupId>
 	<artifactId>PostsService</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<name>PostsService</name>
 	<description>Post service is CRUD service for managing posts</description>
 	<properties>

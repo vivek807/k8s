@@ -29,6 +29,10 @@ Ports forwarding to expose internal services:
  <img src="https://github.com/vivek807/k8s/blob/main/Docs/10.jpg?raw=true"/>
  <img src="https://github.com/vivek807/k8s/blob/main/Docs/11.jpg?raw=true"/>
  <img src="https://github.com/vivek807/k8s/blob/main/Docs/12.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/13.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/14.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/15.jpg?raw=true"/>
+ <img src="https://github.com/vivek807/k8s/blob/main/Docs/16.jpg?raw=true"/>
 </figure>
 
 #### Stop pods
