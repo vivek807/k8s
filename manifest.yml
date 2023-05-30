@@ -83,6 +83,22 @@ spec:
             - name: mysql
               containerPort: 3306
               protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - "sh"
+                - "-c"
+                - "mysqladmin ping -h 127.0.0.1"
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command:
+                - "sh"
+                - "-c"
+                - "mysqladmin ping -h 127.0.0.1"
+            initialDelaySeconds: 15
+            periodSeconds: 10
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
@@ -160,6 +176,20 @@ spec:
                   key: password
             - name: MYSQL_DB_NAME
               value: usersdb
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+              httpGet:
+                path: /actuator/health
+                port: 8080
+              initialDelaySeconds: 15
+              periodSeconds: 10
           volumeMounts:
             - name: mysql-init-script
               mountPath: /mysql-init-script
@@ -223,3 +253,17 @@ spec:
               value: postsdb
             - name: USERS_URL
               value: http://users-service:8080
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -18,5 +19,15 @@ public class ApplicationConfiguration {
 			.description(applicationDescription)
 			.version(buildVersion)
 			.license(new License().name("Apache 2.0")));
+	}
+
+	@Bean
+	public CommonsRequestLoggingFilter requestLoggingFilter() {
+		CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+		loggingFilter.setIncludeClientInfo(true);
+		loggingFilter.setIncludeQueryString(true);
+		loggingFilter.setIncludePayload(true);
+		loggingFilter.setMaxPayloadLength(64000);
+		return loggingFilter;
 	}
 }

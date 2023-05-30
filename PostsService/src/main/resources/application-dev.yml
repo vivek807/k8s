@@ -4,3 +4,5 @@ spring:
   datasource:
     username: username
     password: Admin@123
+
+MYSQL_DB_NAME: workshopdb

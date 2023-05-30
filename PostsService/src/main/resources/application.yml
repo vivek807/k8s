@@ -1,10 +1,13 @@
 server:
   error.whitelabel.enabled: false
 
+management.endpoints.web.exposure.include: '*'
+springdoc.show-actuator: true
+
 springdoc.swagger-ui:
   path: /index.html
   tryItOutEnabled: true
-  filter: false
+  filter: true
 
 application.name: '@project.artifactId@'
 application.description: '@project.description@'

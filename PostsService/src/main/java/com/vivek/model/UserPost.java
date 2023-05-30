@@ -21,6 +21,9 @@ public class UserPost extends BaseModel {
 	@NotBlank
 	private String text;
 
+	@NotBlank
+	private String topic;
+
 	@NotNull
 	private Long authorId;
 
