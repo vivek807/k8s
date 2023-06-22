@@ -50,6 +50,7 @@ Run the command `helm install users-posts-chart .\user-posts-chart\`
 <figure>
 <img src="https://github.com/vivek807/k8s/blob/main/Docs/helm1.jpg?raw=true"/>
 <img src="https://github.com/vivek807/k8s/blob/main/Docs/helm2.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/helm4.jpg?raw=true"/>
 </figure>
 
 #### Delete charts

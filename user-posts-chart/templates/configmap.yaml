@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: mysql-init-script
   namespace: {{.Values.namespace}}
+  labels:
+    current-date: {{ template "users-posts-chart.labels.currentDate" . }}
+    version: {{ template "users-posts-chart.labels.version" . }}
 data:
   init.sql: |
     create database if not exists {{.Values.database.userdbName}};
