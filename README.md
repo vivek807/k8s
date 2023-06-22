@@ -38,6 +38,23 @@ Ports forwarding to expose internal services:
 #### Stop pods
 Run command `kubectl delete -f manifest.yml -n k8s-namespace`
 
+## Install with Helm
+Run the command `helm install users-posts-chart .\user-posts-chart\`
+
+### After launch, verify
+<li>helm ls -A </li>
+<li>kubectl get all -n k8s-namespace</li>
+
+<br/>
+
+<figure>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/helm1.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/helm2.jpg?raw=true"/>
+</figure>
+
+#### Delete charts
+Run command `helm delete users-posts-chart`
+
 ## Launch with docker
 To launch with docker, just run the command `docker compose up`
 
