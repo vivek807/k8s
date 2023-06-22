@@ -56,6 +56,15 @@ Run the command `helm install users-posts-chart .\user-posts-chart\`
 #### Delete charts
 Run command `helm delete users-posts-chart`
 
+## Using ingress
+
+<br/>
+<figure>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/ingress1.jpg?raw=true"/>
+<img src="https://github.com/vivek807/k8s/blob/main/Docs/ingress2.jpg?raw=true"/>
+</figure>
+
+
 ## Launch with docker
 To launch with docker, just run the command `docker compose up`
 

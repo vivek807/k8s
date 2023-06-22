@@ -21,4 +21,9 @@ public class HomeController {
 	public void home(HttpServletResponse response) throws IOException {
 		response.sendRedirect(this.contextPath + path);
 	}
+
+	@GetMapping("/posts")
+	public void posts(HttpServletResponse response) throws IOException {
+		response.sendRedirect(this.contextPath + path);
+	}
 }

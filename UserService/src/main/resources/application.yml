@@ -4,7 +4,7 @@ server:
 management.endpoints.web.exposure.include: '*'
 springdoc.show-actuator: true
 springdoc.swagger-ui:
-  path: /index.html
+  path: /users/index.html
   tryItOutEnabled: true
   filter: true
 

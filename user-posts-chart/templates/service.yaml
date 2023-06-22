@@ -23,11 +23,27 @@ metadata:
   name: users-service
   namespace: {{.Values.namespace}}
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: users
   ports:
     - name: http
       port: 8080
       targetPort: 8080
-      nodePort: 30001
+
+---
+#SERVICE: posts-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-service
+  namespace: {{.Values.namespace}}
+spec:
+  type: ClusterIP
+  selector:
+    app: posts
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

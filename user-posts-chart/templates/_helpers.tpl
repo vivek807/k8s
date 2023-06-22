@@ -1,7 +1,7 @@
 {{/* _helpers.tpl */}}
 
 {{- define "users-posts-chart.labels.currentDate" -}}
-{{- printf "%s" now | quote -}}
+{{- now | date "2006-01-02" }}
 {{- end -}}
 
 {{- define "users-posts-chart.labels.version" -}}

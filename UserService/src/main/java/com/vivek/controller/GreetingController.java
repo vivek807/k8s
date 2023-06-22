@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/greeting")
+@RequestMapping("/users/greeting")
 public class GreetingController {
 	@Value("${build.version}") private String buildVersion;
 	@Value("${application.name}") private String applicationName;
